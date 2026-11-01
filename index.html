@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>何点で分かる？ 北海道の点描</title>
+<meta name="description" content="#30DayMapChallenge Day 1 Points。北海道本島の海岸線から選んだ点を少しずつ増やし、どこで形が分かるかを試す作品。">
+<link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+<main class="app">
+  <header class="head">
+    <div class="title">
+      <h1>何点で分かる？</h1>
+      <p class="sub">北海道の点描 / #30DayMapChallenge Day 1 Points</p>
+    </div>
+    <div class="count" aria-live="polite">
+      <span id="count-n">3</span><span class="unit">点</span>
+      <span class="of">/ <span id="count-max">-</span></span>
+    </div>
+  </header>
+
+  <div class="stage" id="stage">
+    <canvas id="map" aria-label="点の表示"></canvas>
+  </div>
+  <p class="answer-note" id="answer-note"></p>
+
+  <section class="controls" aria-label="操作">
+    <div class="row slider-row">
+      <button type="button" id="btn-minus" class="sq" aria-label="点を減らす">−</button>
+      <input type="range" id="slider" min="0" max="1000" step="1" value="0" aria-label="点の数">
+      <button type="button" id="btn-plus" class="sq" aria-label="点を増やす">＋</button>
+    </div>
+    <div class="row chips" id="chips"></div>
+    <div class="row seg" role="radiogroup" aria-label="点の選び方" id="methods">
+      <button type="button" role="radio" data-method="farthest" aria-checked="true">最遠点</button>
+      <button type="button" role="radio" data-method="dp" aria-checked="false">簡略化</button>
+      <button type="button" role="radio" data-method="arc" aria-checked="false">等間隔</button>
+    </div>
+    <div class="row actions">
+      <button type="button" id="btn-play" class="primary">自動再生</button>
+      <button type="button" id="btn-answer" aria-pressed="false">答えを重ねる</button>
+      <button type="button" id="btn-reset">最初から</button>
+    </div>
+    <p class="method-note" id="method-note"></p>
+  </section>
+
+  <footer class="foot">
+    <details>
+      <summary>この作品について</summary>
+      <div class="about">
+        <p>Natural Earth「1:10m Coastline」の北海道本島の線（頂点 625 点、重複除去後）から点を選んで表示しています。点を増やしても、それまでの点は動かずに残ります。</p>
+        <ul>
+          <li><b>最遠点</b>：すでに置いた点から最も遠い頂点を次に足します。全体に散らばります。</li>
+          <li><b>簡略化</b>：Douglas–Peucker 法を一点ずつ進める形で、今の輪郭から最も外れている頂点を次に足します。岬や湾が先に出ます。</li>
+          <li><b>等間隔</b>：輪郭線の上に、線に沿ってほぼ等しい間隔で点を置きます。元の頂点ではなく、頂点の間を直線で補間した点です。</li>
+        </ul>
+        <p>距離はランベルト正積方位図法（中心 東経142.8° 北緯43.5°）に投影した平面座標で計算しています。元データは縮尺1:1,000万向けに一般化された線で、細かな海岸線は省かれています。利尻島・礼文島・奥尻島など周辺の島は含みません。</p>
+        <p>出典：<a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a>（パブリックドメイン）。</p>
+      </div>
+    </details>
+  </footer>
+</main>
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
