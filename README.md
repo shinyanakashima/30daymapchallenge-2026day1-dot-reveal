@@ -97,7 +97,9 @@ data/hokkaido_points.json
 scripts/          データ生成・確認
 ```
 
-GitHub Pages では、リポジトリの Settings → Pages で「Deploy from a branch」、`main` / `(root)` を選ぶと公開されます。ローカルで確認する場合は、`fetch` を使うためファイルを直接開かずにサーバーを立ててください。
+公開先：https://shinyanakashima.github.io/30daymapchallenge-2026day1-dot-reveal/
+
+`main` にプッシュすると、`.github/workflows/pages.yml` が `index.html`・`src/`・`data/` を GitHub Pages に公開します（Settings → Pages の Source は「GitHub Actions」）。ローカルで確認する場合は、`fetch` を使うためファイルを直接開かずにサーバーを立ててください。
 
 ```bash
 python3 -m http.server 8000
